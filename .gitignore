@@ -1,0 +1,16 @@
+# Ignore compiled Java class files
+*.class
+**/*.class
+
+# Build directories
+out/
+bin/
+target/
+
+# IDE / OS
+.classpath
+.project
+.settings/
+/.vscode/**/workspaceStorage/
+Thumbs.db
+*.log

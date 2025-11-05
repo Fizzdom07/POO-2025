@@ -1,4 +1,4 @@
-package exercicios;
+package pt.escnaval.exercicios;
 
 public class Pessoa {
     private String nome;

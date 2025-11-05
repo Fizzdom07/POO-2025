@@ -1,4 +1,4 @@
-package main.java.pt.escnaval.exercicios;
+package pt.escnaval.exercicios;
 
 import java.util.ArrayList;
 import java.util.List;

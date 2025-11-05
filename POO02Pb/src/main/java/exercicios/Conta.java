@@ -1,4 +1,4 @@
-package main.java.exercicios;
+package exercicios;
 
 public class Conta {
     private int id;

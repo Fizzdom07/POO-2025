@@ -1,4 +1,4 @@
-package main.java.escnaval;
+package escnaval;
 
 public class ArgsEcho {
     public static void main(String[] args) {

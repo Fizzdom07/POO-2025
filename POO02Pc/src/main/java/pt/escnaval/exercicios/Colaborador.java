@@ -1,4 +1,4 @@
-package exercicios;
+package pt.escnaval.exercicios;
 
 import java.time.LocalDate;
 

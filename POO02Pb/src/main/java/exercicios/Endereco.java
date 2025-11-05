@@ -1,4 +1,4 @@
-package main.java.exercicios;
+package exercicios;
 
 public class Endereco {
     private String rua;

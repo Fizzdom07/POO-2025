@@ -10,55 +10,114 @@ public class MenuAlunos {
     }
 
     public void run() {
-        while (true) {
-            System.out.println("\n=== Menu Alunos ===");
-            System.out.println("1) Adicionar aluno");
-            System.out.println("2) Listar alunos");
-            System.out.println("3) Remover aluno por id");
+        int op;
+        do {
+            System.out.println();
+            System.out.println("=== Menu Alunos ===");
+            System.out.println("1) Listar por ID");
+            System.out.println("2) Listar por Nome");
+            System.out.println("3) Adicionar");
+            System.out.println("4) Remover por ID");
+            System.out.println("5) Buscar por nome");
+            System.out.println("6) Renomear por ID");
             System.out.println("0) Sair");
-            int op = UtilsIO.readInt("Escolhe uma opção: ");
+            op = UtilsIO.lerOpcao("Escolhe uma opção: ", 0, 6);
             switch (op) {
                 case 1:
-                    adicionar();
+                    listarPorIdFluxo();
                     break;
                 case 2:
-                    listar();
+                    listarPorNomeFluxo();
                     break;
                 case 3:
-                    remover();
+                    adicionarFluxo();
+                    break;
+                case 4:
+                    removerFluxo();
+                    break;
+                case 5:
+                    buscarFluxo();
+                    break;
+                case 6:
+                    renomearFluxo();
                     break;
                 case 0:
                     System.out.println("Adeus!");
-                    return;
+                    break;
                 default:
                     System.out.println("Opção inválida.");
             }
-        }
+        } while (op != 0);
     }
 
-    private void adicionar() {
-        int id = UtilsIO.readInt("Id do aluno: ");
+    private void adicionarFluxo() {
+        System.out.println();
+        System.out.println("-- Adicionar Aluno --");
+        int id = UtilsIO.lerInt("Id do aluno: ");
         String nome = UtilsIO.readLine("Nome do aluno: ");
-    Aluno a = new Aluno(id, nome);
-    repo.adicionar(a);
-        System.out.println("Aluno adicionado: " + a);
+        try {
+            Aluno a = new Aluno(id, nome);
+            repo.adicionar(a);
+            System.out.println("Aluno adicionado: " + a);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        System.out.println();
     }
 
-    private void listar() {
-        List<Aluno> todos = repo.listarTodos();
-        if (todos.isEmpty()) {
-            System.out.println("Nenhum aluno registado.");
-            return;
-        }
-        System.out.println("--- Lista de Alunos ---");
-        for (Aluno a : todos) {
-            System.out.println(a);
-        }
+    private void listarPorIdFluxo() {
+        System.out.println();
+        System.out.println("-- Lista (ordenada por ID) --");
+        System.out.printf("%6s | %s\n", "ID", "Nome");
+        System.out.println("------+--------------------------------------------------");
+        repo.listarPorId();
+        System.out.println();
     }
 
-    private void remover() {
-        int id = UtilsIO.readInt("Id do aluno a remover: ");
+    private void listarPorNomeFluxo() {
+        System.out.println();
+        System.out.println("-- Lista (ordenada por Nome) --");
+        System.out.printf("%6s | %s\n", "ID", "Nome");
+        System.out.println("------+--------------------------------------------------");
+        repo.listarPorNome();
+        System.out.println();
+    }
+
+    private void removerFluxo() {
+        System.out.println();
+        System.out.println("-- Remover Aluno --");
+        int id = UtilsIO.lerInt("Id do aluno a remover: ");
         boolean ok = repo.removerPorId(id);
         System.out.println(ok ? "Removido." : "Não encontrado.");
+        System.out.println();
+    }
+
+    private void buscarFluxo() {
+        System.out.println();
+        System.out.println("-- Buscar por Nome --");
+        String termo = UtilsIO.readLine("Termo de busca: ");
+        repo.buscarPorNome(termo);
+        System.out.println();
+    }
+
+    private void renomearFluxo() {
+        System.out.println();
+        System.out.println("-- Renomear Aluno --");
+        int id = UtilsIO.lerInt("Id do aluno: ");
+        Aluno a = repo.findById(id);
+        if (a == null) {
+            System.out.println("Aluno não encontrado.");
+            System.out.println();
+            return;
+        }
+        System.out.println("Aluno atual: " + a);
+        String novo = UtilsIO.readLine("Novo nome: ");
+        try {
+            a.setNome(novo);
+            System.out.println("Nome atualizado: " + a);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        System.out.println();
     }
 }

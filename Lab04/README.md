@@ -69,3 +69,35 @@ Registo das versões do JDK nesta máquina (evidência):
 - java: java version "25" 2025-09-16 LTS
 
 Estas linhas servem como evidência para a tarefa (a). Se quiseres, podes substituir pelos outputs exatos do teu terminal.
+
+## h) README, tabela de testes e comandos
+
+Tabela de testes (10 casos) — usar para validar o programa manualmente
+
+| Caso | Ação | Entrada | Resultado esperado |
+|------|------|---------|-------------------|
+| 1 | Adicionar válido | id=1, nome=Maria | Sucesso, aparece na lista |
+| 2 | Adicionar inválido (id<=0) | id=0, nome=João | Mensagem de erro, não adiciona |
+| 3 | Adicionar inválido (nome vazio) | id=2, nome="" | Mensagem de erro, não adiciona |
+| 4 | Adicionar duplicado | id=1, nome=Ana | Mensagem de id duplicado |
+| 5 | Listar por id | (listar) | Lista ordenada por id com cabeçalho |
+| 6 | Listar por nome | (listar) | Lista ordenada por nome com cabeçalho |
+| 7 | Buscar por termo | termo="ar" | Imprime alunos cujo nome contém "ar" (case-insensitive) |
+| 8 | Remover existente | id=1 | Removido, confirma remoção |
+| 9 | Remover inexistente | id=999 | Mensagem "Não encontrado." |
+|10 | Renomear existente | id=2, novo nome="Carlos" | Nome atualizado e mostrado |
+
+Comandos para compilar e correr (PowerShell):
+
+```powershell
+# compilar
+javac -d . Lab04/src/main/java/pt/escnaval/exercicios/*.java
+# correr
+java pt.escnaval.exercicios.MenuAlunos
+```
+
+Notas de design:
+
+- Encapsulamento: campos privados em `Aluno`, getter e setter controlado com validações.
+- equals/hashCode: implementados em `Aluno` apenas com `id` (identidade do domínio).
+- Input robusto: `UtilsIO` usa `Scanner.nextLine()` com parsing manual e validações; `lerOpcao` garante intervalo.

@@ -25,4 +25,26 @@ public class UtilsIO {
             }
         }
     }
+
+    // Portuguese aliases required by the lab description
+    public static int lerInt(String prompt) {
+        return readInt(prompt);
+    }
+
+    /**
+     * Ler uma opção do menu (inteiro) com validação de intervalo.
+     * Se min>max, não valida o intervalo.
+     */
+    public static int lerOpcao(String prompt, int min, int max) {
+        while (true) {
+            int v = readInt(prompt);
+            if (min <= max) {
+                if (v < min || v > max) {
+                    System.out.printf("Opção inválida (deve ser entre %d e %d).\n", min, max);
+                    continue;
+                }
+            }
+            return v;
+        }
+    }
 }

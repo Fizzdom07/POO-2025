@@ -1,46 +1,55 @@
 package pt.escnaval.exercicios;
 
-import java.util.Objects;
-
 public class Aluno {
     private final int id;
     private String nome;
+    private String mensagemErro;
 
     public Aluno(int id, String nome) {
-        if (id <= 0) throw new IllegalArgumentException("id must be > 0");
-        if (nome == null || nome.trim().isEmpty()) throw new IllegalArgumentException("nome must not be empty");
+        this.mensagemErro = "";
+
+        if (id <= 0) {
+            this.mensagemErro = "Erro: id deve ser > 0";
+            this.id = -1;
+            this.nome = "";
+            return;
+        }
         this.id = id;
-        this.nome = nome.trim();
+        setNome(nome); // reutiliza validação
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
+    public int getId() { return id; }
+    public String getNome() { return nome; }
+    public String getMensagemErro() { return mensagemErro; }
 
     public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) throw new IllegalArgumentException("nome must not be empty");
-        this.nome = nome.trim();
+        this.mensagemErro = "";
+
+        if (nome == null) {
+            this.mensagemErro = "Erro: nome não pode ser null";
+            return;
+        }
+
+        String n = nome.trim();
+        if (n.isEmpty()) {
+            this.mensagemErro = "Erro: nome não pode ser vazio";
+            return;
+        }
+        this.nome = n;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Aluno[id=%d, nome='%s']", id, nome);
+    @Override public String toString() {
+        return String.format("%d\t%s", id, nome);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Aluno)) return false;
-        Aluno aluno = (Aluno) o;
-        return id == aluno.id;
+        Aluno other = (Aluno) o;
+        return id == other.id; // identidade pelo id
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    @Override public int hashCode() {
+        return Integer.hashCode(id);
     }
 }

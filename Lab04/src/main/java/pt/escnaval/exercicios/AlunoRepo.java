@@ -1,63 +1,120 @@
 package pt.escnaval.exercicios;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 public class AlunoRepo {
-    private final List<Aluno> alunos = new ArrayList<>();
+    private Aluno[] dados;
+    private int tamanho;
+    private static final int CAPACIDADE_INICIAL = 10;
 
-    /**
-     * Adiciona um aluno; falha se já existir um aluno com o mesmo id.
-     */
-    public void adicionar(Aluno a) {
-        if (a == null) throw new IllegalArgumentException("Aluno não pode ser nulo");
-        if (findById(a.getId()) != null) throw new IllegalArgumentException("Já existe um aluno com id=" + a.getId());
-        alunos.add(a);
+    public AlunoRepo() {
+        this.dados = new Aluno[CAPACIDADE_INICIAL];
+        this.tamanho = 0;
+    }
+
+    private void redimensionar() {
+        Aluno[] novoArray = new Aluno[dados.length * 2];
+        for (int i = 0; i < tamanho; i++) {
+            novoArray[i] = dados[i];
+        }
+        dados = novoArray;
+    }
+
+    public boolean adicionar(Aluno a) {
+        if (findById(a.getId()) != null) return false;
+
+        if (tamanho == dados.length) {
+            redimensionar();
+        }
+        dados[tamanho] = a;
+        tamanho++;
+        return true;
     }
 
     public boolean removerPorId(int id) {
-        return alunos.removeIf(a -> a.getId() == id);
-    }
-
-    /** Retorna o Aluno ou null se não existir */
-    public Aluno findById(int id) {
-        return alunos.stream().filter(a -> a.getId() == id).findFirst().orElse(null);
-    }
-
-    /** Busca por nome (case-insensitive) e imprime os resultados ordenados por nome */
-    public void buscarPorNome(String termo) {
-        if (termo == null) termo = "";
-        String t = termo.trim().toLowerCase();
-        List<Aluno> res = alunos.stream()
-                .filter(a -> a.getNome().toLowerCase().contains(t))
-                .sorted(Comparator.comparing(Aluno::getNome))
-                .collect(Collectors.toList());
-        if (res.isEmpty()) {
-            System.out.println("Nenhum aluno encontrado para: '" + termo + "'");
-            return;
+        int indice = -1;
+        for (int i = 0; i < tamanho; i++) {
+            if (dados[i].getId() == id) {
+                indice = i;
+                break;
+            }
         }
-        res.forEach(System.out::println);
+
+        if (indice == -1) return false;
+
+        for (int i = indice; i < tamanho - 1; i++) {
+            dados[i] = dados[i + 1];
+        }
+        tamanho--;
+        return true;
     }
 
-    /** Imprime todos os alunos ordenados por id */
+    public Aluno findById(int id) {
+        for (int i = 0; i < tamanho; i++) {
+            if (dados[i].getId() == id) {
+                return dados[i];
+            }
+        }
+        return null;
+    }
+
     public void listarPorId() {
-        alunos.stream()
-                .sorted(Comparator.comparingInt(Aluno::getId))
-                .forEach(System.out::println);
+        Aluno[] copia = new Aluno[tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            copia[i] = dados[i];
+        }
+        ordenarPorId(copia, tamanho);
+        for (int i = 0; i < tamanho; i++) {
+            System.out.println(copia[i]);
+        }
     }
 
-    /** Imprime todos os alunos ordenados por nome */
     public void listarPorNome() {
-        alunos.stream()
-                .sorted(Comparator.comparing(Aluno::getNome))
-                .forEach(System.out::println);
+        Aluno[] copia = new Aluno[tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            copia[i] = dados[i];
+        }
+        ordenarPorNome(copia, tamanho);
+        for (int i = 0; i < tamanho; i++) {
+            System.out.println(copia[i]);
+        }
     }
 
-    /** Retorna uma cópia da lista */
-    public List<Aluno> listarTodos() {
-        return new ArrayList<>(alunos);
+    private void ordenarPorId(Aluno[] arr, int n) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j].getId() > arr[j + 1].getId()) {
+                    Aluno temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    private void ordenarPorNome(Aluno[] arr, int n) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                String a = arr[j].getNome() == null ? "" : arr[j].getNome();
+                String b = arr[j + 1].getNome() == null ? "" : arr[j + 1].getNome();
+                if (a.compareTo(b) > 0) {
+                    Aluno temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public void buscarPorNome(String termo) {
+        String t = termo == null ? "" : termo.toLowerCase();
+        boolean algum = false;
+        for (int i = 0; i < tamanho; i++) {
+            String nome = dados[i].getNome();
+            String nomeLower = nome == null ? "" : nome.toLowerCase();
+            if (nomeLower.contains(t)) {
+                System.out.println(dados[i]);
+                algum = true;
+            }
+        }
+        if (!algum) System.out.println("(nenhum resultado)");
     }
 }

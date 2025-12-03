@@ -1,0 +1,119 @@
+﻿
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Lista (ordenada por ID) --
+    ID | Nome
+------+--------------------------------------------------
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Adicionar Aluno --
+Id do aluno: Nome do aluno: Aluno adicionado: 1	Ana
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Adicionar Aluno --
+Id do aluno: Nome do aluno: Aluno adicionado: 1	Ana
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Lista (ordenada por ID) --
+    ID | Nome
+------+--------------------------------------------------
+1	Ana
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Remover Aluno --
+Id do aluno a remover: Removido.
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Remover Aluno --
+Id do aluno a remover: NÒo encontrado.
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Adicionar Aluno --
+Id do aluno: Nome do aluno: Aluno adicionado: 2	null
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Adicionar Aluno --
+Id do aluno: Nome do aluno: Aluno adicionado: 2	Carlos
+
+
+=== Menu Alunos ===
+1) Listar por ID
+2) Listar por Nome
+3) Adicionar
+4) Remover por ID
+5) Buscar por nome
+6) Renomear por ID
+0) Sair
+Escolhe uma opþÒo: 
+-- Buscar por Nome --
+Termo de busca: 

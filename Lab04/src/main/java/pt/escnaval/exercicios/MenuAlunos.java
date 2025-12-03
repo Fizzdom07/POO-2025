@@ -57,8 +57,12 @@ public class MenuAlunos {
         String nome = UtilsIO.readLine("Nome do aluno: ");
         try {
             Aluno a = new Aluno(id, nome);
-            repo.adicionar(a);
-            System.out.println("Aluno adicionado: " + a);
+            if (a.getMensagemErro() != null && !a.getMensagemErro().isEmpty()) {
+                System.out.println(a.getMensagemErro());
+            } else {
+                boolean ok = repo.adicionar(a);
+                System.out.println(ok ? "Adicionado." : "Falha: ID já existente.");
+            }
         } catch (IllegalArgumentException ex) {
             System.out.println("Erro: " + ex.getMessage());
         }
@@ -112,11 +116,11 @@ public class MenuAlunos {
         }
         System.out.println("Aluno atual: " + a);
         String novo = UtilsIO.readLine("Novo nome: ");
-        try {
-            a.setNome(novo);
-            System.out.println("Nome atualizado: " + a);
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Erro: " + ex.getMessage());
+        a.setNome(novo);
+        if (a.getMensagemErro() != null && !a.getMensagemErro().isEmpty()) {
+            System.out.println(a.getMensagemErro());
+        } else {
+            System.out.println("Atualizado.");
         }
         System.out.println();
     }

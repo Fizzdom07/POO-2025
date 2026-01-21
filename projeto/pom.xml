@@ -7,7 +7,7 @@
 
     <groupId>pt.escnaval</groupId>
     <artifactId>maintenance-system</artifactId>
-    <version>1.0-LEVEL50+</version>
+    <version>1.0-LEVEL60</version>
     <packaging>jar</packaging>
 
     <name>Sistema de Gestão da Manutenção</name>

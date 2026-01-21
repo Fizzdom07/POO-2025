@@ -1,6 +1,41 @@
 # CHANGELOG - Projeto
 
-## [1.0] - 20 de Janeiro de 2026
+## [1.0-LEVEL60] - 21 de Janeiro de 2026
+
+### 🎉 Nível 60 - Planos Preventivos e Notificações
+
+#### Adicionado
+- ✅ Entidade `PreventivePlan` com enum `PreventivePolicies` (TEMPO, USO, HIBRIDA)
+- ✅ Entidade `Notification` com enum `NotificationType` (6 tipos)
+- ✅ Serviço `PreventivePlanService` - Gestão completa de planos preventivos
+- ✅ Serviço `NotificationService` - Sistema de notificações
+- ✅ Repositório `FilePreventivePlanRepository` - Persistência de planos
+- ✅ Repositório `FileNotificationRepository` - Persistência de notificações
+- ✅ Menu de Gestão de Planos Preventivos na UI
+- ✅ Menu de Gestão de Notificações na UI
+- ✅ 5 novos testes para PreventivePlanService
+- ✅ 5 novos testes para NotificationService
+- ✅ Badges informativos (notificações não lidas no menu principal)
+- ✅ Alertas automáticos no startup
+
+#### Funcionalidades
+- ✅ RF04 - Planeamento de Manutenção Preventiva (Completo)
+  - Criar planos com periodicidade e janela de aceitação
+  - Registar execuções com timestamp
+  - Listar planos ativos, inativos, vencidos
+  - Desativar/ativar planos
+  - Cálculo automático de planos vencidos
+  
+- ✅ RF14 - Notificações do Sistema (Completo)
+  - Criar notificações contextualizadas (Estado, Prioridade, Stock, Prazo, Manutenção, Info)
+  - Visualizar notificações por estado (lidas/não lidas)
+  - Marcar como lida (individual/massa)
+  - Contar notificações pendentes
+  - Alertas por tipo de entidade
+
+---
+
+## [1.0-LEVEL50] - 20 de Janeiro de 2026
 
 ### 🎉 Versão Inicial - Nível 50 (MVP)
 

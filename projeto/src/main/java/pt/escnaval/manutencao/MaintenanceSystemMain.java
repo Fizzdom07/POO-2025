@@ -1,8 +1,6 @@
 package pt.escnaval.manutencao;
 
-import pt.escnaval.manutencao.aplicacao.AssetService;
-import pt.escnaval.manutencao.aplicacao.InventoryService;
-import pt.escnaval.manutencao.aplicacao.WorkOrderService;
+import pt.escnaval.manutencao.aplicacao.*;
 import pt.escnaval.manutencao.infraestrutura.*;
 import pt.escnaval.manutencao.ui.MaintenanceConsole;
 
@@ -10,7 +8,7 @@ import java.nio.file.Paths;
 
 /**
  * Classe principal do Sistema de Gestão da Manutenção.
- * Versão Nível 50: Consola com ficheiros (MVP básico).
+ * Versão Nível 60: Consola com ficheiros, planos preventivos e notificações.
  */
 public class MaintenanceSystemMain {
 
@@ -23,14 +21,20 @@ public class MaintenanceSystemMain {
         WorkOrderRepository workOrderRepository = new FileWorkOrderRepository(dataDir);
         PartRepository partRepository = new FilePartRepository(dataDir);
         UserRepository userRepository = new FileUserRepository(dataDir);
+        PreventivePlanRepository preventivePlanRepository = new FilePreventivePlanRepository();
+        NotificationRepository notificationRepository = new FileNotificationRepository();
 
         // Inicializar serviços
         AssetService assetService = new AssetService(assetRepository);
         WorkOrderService workOrderService = new WorkOrderService(workOrderRepository, assetRepository);
         InventoryService inventoryService = new InventoryService(partRepository);
+        PreventivePlanService preventivePlanService = new PreventivePlanService(preventivePlanRepository);
+        NotificationService notificationService = new NotificationService(notificationRepository);
 
         // Inicializar e executar consola
-        MaintenanceConsole console = new MaintenanceConsole(assetService, workOrderService, inventoryService);
+        MaintenanceConsole console = new MaintenanceConsole(assetService, workOrderService, inventoryService,
+                                                            preventivePlanService, notificationService);
         console.run();
     }
 }
+

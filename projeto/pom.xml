@@ -7,11 +7,11 @@
 
     <groupId>pt.escnaval</groupId>
     <artifactId>maintenance-system</artifactId>
-    <version>1.0-LEVEL50</version>
+    <version>1.0-LEVEL50+</version>
     <packaging>jar</packaging>
 
     <name>Sistema de Gestão da Manutenção</name>
-    <description>Projeto POO - Escola Naval 2025/2026</description>
+    <description>Projeto POO - Escola Naval 2025/2026 - Nível 60</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

@@ -17,7 +17,8 @@ public class WorkOrder implements Serializable {
     private int priority; // 1..5
     private String title;
     private String description;
-    private transient Asset asset;
+    private Long assetId; // Serializado, para persistência
+    private transient Asset asset; // Carregado em memória
     private transient User requester; // optional
     private transient User assignee;  // optional
     private LocalDateTime plannedStart; // optional
@@ -37,6 +38,7 @@ public class WorkOrder implements Serializable {
         this.priority = priority;
         this.title = Objects.requireNonNull(title, "Título não pode ser nulo");
         this.asset = Objects.requireNonNull(asset, "Ativo não pode ser nulo");
+        this.assetId = asset.getId(); // Guardar ID para serialização
         this.status = WorkOrderStatus.ABERTA;
         this.totalCost = 0.0;
         this.createdAt = LocalDateTime.now();
@@ -101,6 +103,15 @@ public class WorkOrder implements Serializable {
 
     public void setAsset(Asset asset) {
         this.asset = Objects.requireNonNull(asset, "Ativo não pode ser nulo");
+        this.assetId = asset.getId(); // Manter assetId sincronizado
+    }
+
+    public Long getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(Long assetId) {
+        this.assetId = assetId;
     }
 
     public User getRequester() {

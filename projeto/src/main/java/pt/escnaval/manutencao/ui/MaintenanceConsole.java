@@ -203,9 +203,10 @@ public class MaintenanceConsole {
         System.out.println(String.format("%-5s %-12s %-12s %-5s %-20s %-10s", "ID", "Tipo", "Estado", "Prio", "Título", "Ativo ID"));
         System.out.println("-".repeat(75));
         for (WorkOrder wo : workOrders) {
+            Long assetId = wo.getAssetId() != null ? wo.getAssetId() : (wo.getAsset() != null ? wo.getAsset().getId() : -1L);
             System.out.println(String.format("%-5d %-12s %-12s %-5d %-20s %-10d",
                     wo.getId(), wo.getType().getDescricao(), wo.getStatus().getDescricao(),
-                    wo.getPriority(), wo.getTitle(), wo.getAsset().getId()));
+                    wo.getPriority(), wo.getTitle(), assetId));
         }
     }
 

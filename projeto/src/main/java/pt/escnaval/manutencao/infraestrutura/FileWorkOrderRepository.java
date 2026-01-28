@@ -58,7 +58,7 @@ public class FileWorkOrderRepository implements WorkOrderRepository {
     @Override
     public List<WorkOrder> findByAssetId(Long assetId) {
         return cache.values().stream()
-                .filter(wo -> wo.getAsset().getId().equals(assetId))
+                .filter(wo -> wo.getAssetId() != null && wo.getAssetId().equals(assetId))
                 .toList();
     }
 
